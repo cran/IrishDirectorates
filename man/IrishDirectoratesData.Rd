@@ -1,18 +1,16 @@
-\name{IrishDirectorates}
-\alias{IrishDirectorates}
+\name{IrishDirectoratesData}
+\alias{IrishDirectoratesData}
 \docType{data}
 \title{
-%%   ~~ data name/kind ... ~~
 Board Composition For Companies Quoted On The Irish Stock Exchange From 2003 To 2013
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of the dataset. ~~
 Board composition for companies quoted on Irish Stock Exchange from 2003 to 2013.
 Board compositions are only observed at the end of each year.
 }
-\usage{data("IrishDirectorates")}
+\usage{data("IrishDirectoratesData")}
 \format{
-  \code{IrishDirectorates} is a list containing:
+  \code{IrishDirectoratesData} is a list containing:
   \describe{
     \item{\code{edgelist}}{the edgelist for a bipartite dynamic network. Each row of this dataframe corresponds to an undirected edge in the network. For each row, the first entry identifies the time frame where the edge occurs, the second entry represents the director, whereas the third identifies the company. The presence of an edge at a certain time frame between a director and a company means that the director was part of the company's board at the end of the corresponding year. }
     \item{\code{years}}{lookup table for the time frame labels.}
@@ -21,19 +19,17 @@ Board compositions are only observed at the end of each year.
   }
 }
 \details{
-%%  ~~ If necessary, more details than the __description__ above ~~
 The adjacency cube can be constructed from the edgelist. Please see example for sample code.
 }
 \source{
-%%  ~~ reference to a publication or URL from which the data were obtained ~~
 Irish Stock Exchange (http://www.ise.ie/).
 }
 \references{
 Friel, N., Rastelli, R., Wyse, J. and Raftery, A.E. (2016) <DOI:10.1073/pnas.1606295113>.
 }
 \examples{
-data(IrishDirectorates)
-attach(IrishDirectorates)
+data(IrishDirectoratesData)
+attach(IrishDirectoratesData)
 
 N <- length(directors_names)
 M <- length(companies_names)
@@ -57,7 +53,7 @@ for (t in 1:tframes) for (i in 1:N) for (j in 1:M) if (adj[i,j,t] == 1) {
   if (interlocked_directors[i,t] > 0) interlocking_companies[j,t] = 1
 }
 
-#  extract labels of interlocking companies
+# extract labels of interlocking companies
 selected_companies <- which(rowSums(interlocking_companies) > 0)
 
 # extract labels of remaining active directors
@@ -66,6 +62,5 @@ selected_directors <- which(rowSums(new_out_degrees) > 0)
 
 # create the new adjacency cube for the reduced data, as shown in the referenced paper
 adj_reduced <- adj[selected_directors, selected_companies, ]
-
 }
 \keyword{datasets}

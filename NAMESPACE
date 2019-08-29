@@ -1,1 +1,4 @@
-exportPattern("^[[:alpha:]]+")
+useDynLib(IrishDirectorates, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+export("dblpm_posterior")
+export("dblpm_mcmc")
